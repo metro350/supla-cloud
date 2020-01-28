@@ -25,11 +25,12 @@
                 sideBySide: true
             }).on("dp.change", () => this.updateTimeExpression());
             if (this.value) {
-                let currentDateFromExpression = moment(this.value, 'm H D M * Y');
-                datepicker.data('DateTimePicker').date(currentDateFromExpression);
-            } else {
-                this.updateTimeExpression();
+                const currentDateFromExpression = moment(this.value, 'm H D M * Y');
+                if (currentDateFromExpression.isAfter(moment())) {
+                    datepicker.data('DateTimePicker').date(currentDateFromExpression);
+                }
             }
+            this.updateTimeExpression();
         },
         methods: {
             updateTimeExpression() {
